@@ -1,16 +1,19 @@
 const LEVELS = [
   {
     name: "Первое знакомство",
+    style: "intro",
     title: "Первое знакомство",
     description: "Лёгкие вопросы, чтобы начать разговор и узнать человека без напряжения."
   },
   {
     name: "Сближение",
+    style: "close",
     title: "Сближение",
     description: "Вопросы, которые помогают лучше понять характер, ценности и стиль мышления человека."
   },
   {
     name: "Глубокие смысловые вопросы",
+    style: "deep",
     title: "Глубокие смысловые вопросы",
     description: "Вопросы для доверительной атмосферы, личных размышлений и более глубокого разговора."
   }
@@ -54,7 +57,7 @@ bindGameActions();
 
 function renderLevelCards() {
   levelList.innerHTML = LEVELS.map((level, index) => `
-    <button class="level-card" type="button" data-level="${level.name}">
+    <button class="level-card" type="button" data-level="${level.name}" data-level-style="${level.style}">
       <span class="level-number">${index + 1}</span>
       <h3>${level.title}</h3>
       <p>${level.description}</p>
@@ -117,6 +120,10 @@ function showScreen(screenName) {
     return;
   }
 
+  if (screenName !== "question") {
+    document.body.removeAttribute("data-active-level");
+  }
+
   Object.values(screens).forEach((screen) => screen.classList.remove("screen--active"));
   screens[screenName].classList.add("screen--active");
 }
@@ -145,6 +152,7 @@ function renderQuestion() {
   const shown = getShownQuestionIds(currentLevel);
   const total = getQuestionsForLevel(currentLevel).length;
 
+  document.body.dataset.activeLevel = getLevelStyle(currentLevel);
   questionLevel.textContent = currentLevel;
   questionCounter.textContent = `${shown.length} из ${total}`;
   questionText.textContent = currentQuestion.text;
@@ -176,6 +184,11 @@ function getRandomQuestion(level) {
 
 function getQuestionsForLevel(level) {
   return QUESTIONS.filter((question) => question.level === level);
+}
+
+function getLevelStyle(level) {
+  const levelConfig = LEVELS.find((item) => item.name === level);
+  return levelConfig ? levelConfig.style : "";
 }
 
 function rateCurrentQuestion(rating) {
