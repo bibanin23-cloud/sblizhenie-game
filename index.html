@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сближение</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="screen screen--active" id="home-screen" aria-labelledby="home-title">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <p class="eyebrow">Веб-игра для разговора</p>
+        <h1 id="home-title">Сближение</h1>
+        <p class="lead">
+          Игра, которая помогает людям лучше узнать друг друга через вопросы,
+          истории, ценности и личные смыслы.
+        </p>
+        <div class="actions">
+          <button class="button button--primary" type="button" data-go="levels">Начать игру</button>
+          <button class="button button--secondary" type="button" data-go="rules">Правила</button>
+        </div>
+      </section>
+
+      <section class="screen" id="rules-screen" aria-labelledby="rules-title">
+        <p class="eyebrow">Перед началом</p>
+        <h2 id="rules-title">Как играть</h2>
+        <ol class="rules-list">
+          <li>Выберите уровень вопросов.</li>
+          <li>Получите случайный вопрос.</li>
+          <li>Ответьте настолько открыто, насколько вам комфортно.</li>
+          <li>Остальные участники тоже могут ответить на этот вопрос или просто послушать.</li>
+          <li>Любой вопрос можно пропустить.</li>
+          <li>После ответа оцените вопрос от 1 до 5.</li>
+          <li>Затем переходите к следующему вопросу.</li>
+        </ol>
+        <p class="note">
+          В игре нет правильных или неправильных ответов. Главная цель — лучше
+          понять друг друга, а не оценивать ответы.
+        </p>
+        <p class="note">
+          Оценка вопроса нужна для того, чтобы со временем оставить в игре самые
+          сильные и интересные вопросы.
+        </p>
+        <div class="actions">
+          <button class="button button--primary" type="button" data-go="levels">Начать игру</button>
+          <button class="button button--secondary" type="button" data-go="home">На главный экран</button>
+        </div>
+      </section>
+
+      <section class="screen" id="levels-screen" aria-labelledby="levels-title">
+        <p class="eyebrow">Выберите глубину</p>
+        <h2 id="levels-title">Уровень вопросов</h2>
+        <div class="level-grid" id="level-list"></div>
+        <div class="actions actions--single">
+          <button class="button button--secondary" type="button" data-go="home">На главный экран</button>
+        </div>
+      </section>
+
+      <section class="screen" id="question-screen" aria-labelledby="question-level">
+        <div class="question-topline">
+          <p class="eyebrow" id="question-level">Уровень</p>
+          <p class="counter" id="question-counter"></p>
+        </div>
+
+        <article class="question-card">
+          <p id="question-text"></p>
+        </article>
+
+        <section class="rating-panel" aria-labelledby="rating-title">
+          <h2 id="rating-title">Оцени вопрос:</h2>
+          <p class="rating-hint">1 — не зашёл, 5 — отличный вопрос</p>
+          <div class="rating-buttons" id="rating-buttons" aria-label="Оценка вопроса">
+            <button type="button" data-rating="1">1</button>
+            <button type="button" data-rating="2">2</button>
+            <button type="button" data-rating="3">3</button>
+            <button type="button" data-rating="4">4</button>
+            <button type="button" data-rating="5">5</button>
+          </div>
+          <p class="status-message" id="rating-status" aria-live="polite"></p>
+          <button class="button button--secondary retry-button is-hidden" type="button" id="retry-rating">
+            Повторить отправку
+          </button>
+        </section>
+
+        <div class="actions actions--stacked">
+          <button class="button button--primary" type="button" id="next-question">Следующий вопрос</button>
+          <button class="button button--secondary" type="button" data-go="levels">Выбрать другой уровень</button>
+          <button class="button button--ghost" type="button" data-go="home">На главный экран</button>
+        </div>
+      </section>
+
+      <section class="screen" id="finished-screen" aria-labelledby="finished-title">
+        <p class="eyebrow">Уровень завершён</p>
+        <h2 id="finished-title">Вопросы этого уровня закончились</h2>
+        <p class="lead">
+          Можно начать уровень заново или выбрать другой уровень.
+        </p>
+        <div class="actions">
+          <button class="button button--primary" type="button" id="restart-level">Начать уровень заново</button>
+          <button class="button button--secondary" type="button" data-go="levels">Выбрать другой уровень</button>
+          <button class="button button--ghost" type="button" data-go="home">На главный экран</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
